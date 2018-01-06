@@ -1,12 +1,14 @@
 {
   "pages":[
-    "pages/index/index",
-    "pages/logs/logs"
+    "pages/board/board",
+    "pages/list/list",
+    "pages/item/item",
+    "pages/search/search"
   ],
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
+    "navigationBarTitleText": "豆瓣电影",
     "navigationBarTextStyle":"black"
   }
 }
