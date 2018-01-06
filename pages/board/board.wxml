@@ -9,5 +9,24 @@
     </swiper>
   </view>
 
-  <view class='board'></view>
+  <view class='board'>
+    <navigator url='../list/list?type=in_teathers' hover-class='none'>
+      <view class='board-item'>
+      <text>正在热映</text>
+      <image src='../../images/arrowright.png' mode='aspectFill'></image>
+    </view>
+    </navigator>
+    <view class='board-item'>
+      <text>正在热映</text>
+      <image src='../../images/arrowright.png' mode='aspectFill'></image>
+    </view>
+    <view class='board-item'>
+      <text>正在热映</text>
+      <image src='../../images/arrowright.png' mode='aspectFill'></image>
+    </view>
+    <view class='board-item'>
+      <text>正在热映</text>
+      <image src='../../images/arrowright.png' mode='aspectFill'></image>
+    </view>
+  </view>
 </view>
