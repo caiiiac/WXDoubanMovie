@@ -1,9 +1,19 @@
+const api = require('../../api/api.js')
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    boards: [
+      { key: 'in_theaters', name: '正在热映' },
+      { key: 'coming_soon', name: '即将上映' },
+      { key: 'top250', name: 'TOP250' },
+      { key: 'us_box', name: '北美票房榜' },
+    ],
+    movies: [],
+    loading: true,
     imgUrls:[
       'https://img1.doubanio.com/view/photo/s_ratio_poster/public/p2508926717.jpg',
       'https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2507227732.jpg'
@@ -14,7 +24,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    api.find('in_theaters', 1, 5)
+      .then(d => this.setData({ movies: d.subjects, loading: false}))
+      .catch(e => {
+        console.error(e)
+        this.setData({ movies: [], loading: false })
+      })
   },
 
   /**
