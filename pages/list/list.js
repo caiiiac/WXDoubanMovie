@@ -1,36 +1,68 @@
+const api = require('../../api/api.js')
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    list: [],
-    title: 'Loading'
+    title: '',
+    page: 1,
+    size: 20,
+    type: 'in_theaters',
+    subtitle: '加载中...',
+    loading: true,
+    hasMore: true,
+    movies: []
   },
 
+  loadMore() {
+    console.log('loadmore')
+    if (!this.data.hasMore) return
+
+    this.setData({ subtitle: '加载中...', loading: true })
+    api.find(this.data.type, this.data.page++, this.data.size)
+      .then(d => {
+        if (d.subjects.length) {
+          this.setData({ subtitle: d.title, movies: this.data.movies.concat(d.subjects), loading: false })
+        } else {
+          this.setData({ subtitle: d.title, hasMore: false, loading: false })
+        }
+      })
+      .catch(e => {
+        this.setData({ subtitle: '获取数据失败', loading: false })
+        console.error(e)
+      })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    const _this = this
-    const apiUrl = 'https://api.douban.com/v2/movie' + options.type
-    wx.request({
-      url: apiUrl,
-      data: {},
-      header: {
-        'Content-Type': 'json'
-      },
-      success: function(res) {
-        _this.setData({ list: res.data.subjects, title:res.data.title })
-      }
-    })
-  },
+    this.data.title = options.title || this.data.title
 
+    this.data.type = options.type || this.data.type
+
+    api.find(this.data.type, this.data.page++, this.data.size)
+      .then(d => {
+        if(d.subjects.length) {
+          this.setData({ subtitle: d.title, movies: d.subjects, loading: false })
+        } else {
+          this.setData({ hasMore: false, loading: false })
+        }
+      })
+      .catch(e => {
+        this.setData({ subtitle: '获取数据失败', movies: [], loading: false })
+        console.error(e)
+      })
+  },
+  
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    
+    wx.setNavigationBarTitle({
+      title: this.data.title,
+    })
   },
 
   /**

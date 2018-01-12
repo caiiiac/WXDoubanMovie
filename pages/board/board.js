@@ -13,11 +13,7 @@ Page({
       { key: 'us_box', name: '北美票房榜' },
     ],
     movies: [],
-    loading: true,
-    imgUrls:[
-      'https://img1.doubanio.com/view/photo/s_ratio_poster/public/p2508926717.jpg',
-      'https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2507227732.jpg'
-    ]
+    loading: true
   },
 
   /**
