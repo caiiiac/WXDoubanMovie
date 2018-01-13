@@ -1,9 +1,14 @@
+const api = require('../../api/api.js')
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    title: '',
+    loading: true,
+    movie: {}
     
   },
 
@@ -11,14 +16,21 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    api.findOne(options.id)
+      .then(d => this.setData({ title: d.title, movie: d, loading: false }))
+      .catch(e => {
+        this.setData({ title: '获取数据失败', movie: {}, loading: false })
+        console.error(e)
+      })
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    
+    wx.setNavigationBarTitle({
+      title: this.data.title
+    })
   },
 
   /**

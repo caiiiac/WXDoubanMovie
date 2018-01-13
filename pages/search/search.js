@@ -1,12 +1,28 @@
+var initData = 'thit is first line\nthis is second line'
+var extraLine = []
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    
+    text: initData
   },
-
+  add: function(e) {
+    extraLine.push('other line')
+    this.setData({
+      text: initData + '\n' + extraLine.join('\n')
+    })
+  },
+  remove: function(e) {
+    if (extraLine.length > 0) {
+      extraLine.pop()
+      this.setData({
+        text: initData + '\n' + extraLine.join('\n')
+      })
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */

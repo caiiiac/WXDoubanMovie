@@ -16,7 +16,7 @@ Page({
     movies: []
   },
 
-  loadMore() {
+  loadMore: function() {
     console.log('loadmore')
     if (!this.data.hasMore) return
 
